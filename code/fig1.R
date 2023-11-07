@@ -1,5 +1,5 @@
 # Description ----
-# Analyses and figures for
+# Figure 1 plot and analyses from
 # Michaletz, S.T. & Garen, J.C. (in review) On the scaling of biological rates with temperature.
 
 # Initialize ----
@@ -106,5 +106,5 @@ neu2 <- ggplot() +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
 neu2
 
-# Figure 1: Plot panels together
+# Figure 1: Plot panels together ----
 grid.arrange(neu1, neu2, ncol=2)
