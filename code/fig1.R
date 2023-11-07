@@ -1,5 +1,4 @@
 # Description ----
-
 # Analyses and figures for
 # Michaletz, S.T. & Garen, J.C. (in review) On the scaling of biological rates with temperature.
 
