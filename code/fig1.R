@@ -4,9 +4,6 @@
 # Michaletz, S.T. & Garen, J.C. (in review) On the scaling of biological rates with temperature.
 
 # Initialize ----
-#--Set working directory
-setwd("E:/Documents/MS - working/2023 Michaletz Garen temp scaling/temp response data/")
-
 #--Libraries
 library(nls.multstart)
 library(ggplot2)
