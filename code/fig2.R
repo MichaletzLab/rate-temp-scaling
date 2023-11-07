@@ -134,7 +134,7 @@ df = data.frame(temperature = temp_K-273.15,
 df = df %>% mutate(Photo_BAfit = Photo_BAfit/max(Photo_FvCB),
                    Photo_FvCB = Photo_FvCB/max(Photo_FvCB))
 
-# Figure 2: Plot A-T in modified Arrhenius space----#
+# Figure 2: Plot A-T in modified Arrhenius space----
 df$neg_invT <- -1/(0.00008617*(df$temperature + 273.15))
 fig2 <- ggplot() + 
   geom_point(data = df, aes(x = neg_invT, y = Photo_FvCB), shape = 19, size = 1, col = "#00B050") +
