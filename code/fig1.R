@@ -90,13 +90,28 @@ summary(fit_neu2)
 # Calculate S-S estimates of rate for plotting
 predict_SS2 <- data.frame(neg_invT = neu$neg_invT, rate = predict(fit_neu2, newdata=neu$neg_invT))
 
-# Figure 1b: Plot in modified Arrhenius space
+# Estimate Eq (Pawar et al. 2016)
+# Truncate 'neu' dataframe to T < Tpeak
+neu_trunc2 <- subset(neu, neu$neg_invT <= neu$neg_invT[which.max(neu$rate)])
+# Fit Pawar Quadratic model to T < Topt
+neu_trunc2 = neu_trunc2 %>% mutate(lnRate = log(rate)) %>% mutate(invT2 = invT*invT)
+fit_neu3 = lm(lnRate ~ invT +invT2, data = neu_trunc2)
+# Extract Eq
+kb <- 8.62e-5
+eq = -coef(fit_neu3)[2] - 2*coef(fit_neu3)[3]*(1/(kb*mean(neu_trunc2$Temp_K))) # Eqn. 10, Pawar et al. (2016)
+eq
+# Calculate Pawar et al. (2016) estimates of rate for plotting
+predict_SS3 <- data.frame(neg_invT = neu_trunc2$neg_invT, lnRate = predict(fit_neu3, newdata=data.frame(invT=neu_trunc2$invT, invT2=neu_trunc2$invT2)))
+predict_SS3$rate <- exp(predict_SS3$lnRate)
+
+# Figure 1b: Plot all fits in modified Arrhenius space
 neu2 <- ggplot() + 
   geom_point(data = neu, aes(x = neg_invT, y = rate), shape = 19, size = 2.75, col = "gray85") +
   geom_line(data = predict_SS2, aes(x = neg_invT, y = rate), color = 'black', linewidth = 0.75) + # Plot Sharpe-Schoolfield with low- and high-temp deactivation
-  stat_ma_line(data=neu_trunc, mapping = aes(x = neg_invT, y = rate, group=grp), method="RMA", range.y = "interval", range.x = "interval", color = "#e28743", linewidth = 0.75, se=F) + #Plot strucchange piecewise RMA Arrhenius fit to data below Tpeak
   stat_ma_line(data=subset(neu, neu$neg_invT <= neu$neg_invT[which.max(neu$rate)]), 
-               aes(x = neg_invT, y = rate), method="RMA", range.y = "interval", range.x = "interval", color = "#1e81b0", linewidth = 0.75, se=F) + #Plot RMA Arrhenius fit to data below Tpeak
+               aes(x = neg_invT, y = rate), method="RMA", range.y = "interval", range.x = "interval", color = "#FF00FF", linewidth = 0.75, se=F) + #Plot RMA Arrhenius fit to data below Tpeak
+  geom_line(data = predict_SS3, aes(x = neg_invT, y = rate), color = '#FFA500', linewidth = 0.75) + # Plot Pawar et al. (2016) fit
+  stat_ma_line(data=neu_trunc, mapping = aes(x = neg_invT, y = rate, group=grp), method="RMA", range.y = "interval", range.x = "interval", color = "#00BFFF", linewidth = 0.75, se=F) + #Plot strucchange piecewise RMA Arrhenius fit to data below Tpeak
   xlab(expression(paste('Reciprocal thermal energy, ', '-1/',italic('k')[italic("B")], italic('T'), ' (',  eV^{-1}, ')'))) +
   ylab(expression(paste("Population growth rate (cells ", cell^{-1}, " ", time^{-1}, ")"))) +
   scale_x_continuous(sec.axis = sec_axis(trans = ~ (-1/(.*0.00008617))-273.15 , name = expression(paste('Temperature'~(degree*C))))) +
@@ -108,3 +123,6 @@ neu2
 
 # Figure 1: Plot panels together ----
 grid.arrange(neu1, neu2, ncol=2)
+
+
+
