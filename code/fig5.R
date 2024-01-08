@@ -222,5 +222,5 @@ p = p1 +
 
 # Write to file
 svg("fig5.svg", width = 4, height = 3.25)
-grid.arrange(p)
+grid.arrange(p1)
 dev.off()
