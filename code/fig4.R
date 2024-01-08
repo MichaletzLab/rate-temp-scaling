@@ -81,8 +81,8 @@ p1 = ggplot(results, aes(x=Width,y=Mean_T,fill=E_arr, color=E_arr)) +
   theme(legend.background = element_blank(),
         legend.box.background = element_blank(),
         legend.key = element_blank()) +
-  scale_colour_distiller(name=expression(italic(E[a])),palette = "Spectral", direction = 1)+
-  scale_fill_distiller(name=expression(italic(E[a])),palette = "Spectral", direction = 1)+
+  scale_colour_distiller(name=expression(italic(E[a*","*A])),palette = "Spectral", direction = 1)+
+  scale_fill_distiller(name=expression(italic(E[a*","*A])),palette = "Spectral", direction = 1)+
   labs(tag="A")
 
 # Generate TPC
@@ -109,7 +109,7 @@ p2 = ggplot(tpc, aes(x=temperature,y=performance)) +
 p3 = ggplot(data = results, aes(x = E_arr)) +
   geom_density() +
   my_theme +
-  xlab(expression(italic(E[a])~"(eV)")) +
+  xlab(expression(italic(E[a*","*A])~"(eV)")) +
   ylab("Density") +
   labs(tag = "C")
 
