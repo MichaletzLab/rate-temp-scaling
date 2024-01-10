@@ -131,8 +131,8 @@ neu2 <- ggplot() +
   geom_point(data = neu, aes(x = neg_invT, y = rate), shape = 19, size = 2.75, col = "gray85") +
   stat_ma_line(data=subset(neu, neu$neg_invT <= neu$neg_invT[which.max(neu$rate)]), 
                aes(x = neg_invT, y = rate), method="RMA", range.y = "interval", range.x = "interval", color = "#FF00FF", linewidth = 0.75, se=F, lty=1) + #Plot RMA Arrhenius fit to data below Tpeak
-  geom_line(data = predict_SS3, aes(x = neg_invT, y = rate*0.96), color = '#FFA500', linewidth = 0.75, lty=1) + # Plot Pawar et al. (2016) fit
-  stat_ma_line(data=neu_trunc, mapping = aes(x = neg_invT, y = rate*1.04, group=grp), method="RMA", range.y = "interval", range.x = "interval", color = "#00BFFF", linewidth = 0.75, se=F, lty=1) + #Plot strucchange piecewise RMA Arrhenius fit to data below Tpeak
+  geom_line(data = predict_SS3, aes(x = neg_invT, y = rate), color = '#FFA500', linewidth = 0.75, lty=1) + # Plot Pawar et al. (2016) fit
+  stat_ma_line(data=neu_trunc, mapping = aes(x = neg_invT, y = rate, group=grp), method="RMA", range.y = "interval", range.x = "interval", color = "#00BFFF", linewidth = 0.75, se=F, lty=1) + #Plot strucchange piecewise RMA Arrhenius fit to data below Tpeak
   geom_line(data = predict_SS2, aes(x = neg_invT, y = rate), color = 'black', linewidth = 0.75, lty=3) + # Plot Sharpe-Schoolfield with low- and high-temp deactivation
   xlab(expression(paste('Reciprocal thermal energy, ', '-1/',italic('k')[italic("B")], italic('T'), ' (',  eV^{-1}, ')'))) +
   ylab(expression(paste("Population growth rate (cells ", cell^{-1}, " ", time^{-1}, ")"))) +
