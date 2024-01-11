@@ -37,7 +37,7 @@ ggplot(fitting_data, aes(x = temperature, y = performance)) +
   my_theme +
   #theme(strip.placement) +
   xlab("Temperature (°C)") +
-  ylab("Performance") +
+  ylab("Biological rate") +
   facet_wrap(~t_range,ncol=4, strip.position="right",
              labeller = as_labeller(c("5" = "T[range]==5*~degree*C",
                                       "7" = "T[range]==7*~degree*C",
