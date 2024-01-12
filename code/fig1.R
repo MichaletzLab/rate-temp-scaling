@@ -1,6 +1,6 @@
 # Description ----
 # Figure 1 plot and analyses from
-# Michaletz, S.T. & Garen, J.C. (in review) On the scaling of biological rates with temperature.
+# Michaletz ST & Garen JC. 2024. Hotter is not (always) better: Embracing unimodal scaling of biological rates with temperature.
 
 # Initialize ----
 #--Libraries
@@ -143,8 +143,8 @@ neu2 <- ggplot() +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
 neu2
 
-png("plot.png", width = 8,height = 4, res = 300, units = "in")
 # Figure 1: Plot panels together ----
+png("Figure_1.png", width = 8,height = 4, res = 300, units = "in")
 grid.arrange(neu1, neu2, ncol=2)
 dev.off()
 

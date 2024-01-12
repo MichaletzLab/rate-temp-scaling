@@ -1,3 +1,6 @@
+# Figure S1 plot and analyses from
+# Michaletz ST & Garen JC. 2024. Hotter is not (always) better: Embracing unimodal scaling of biological rates with temperature.
+
 library(rTPC)
 library(tidyverse)
 library(ggplot2)

@@ -1,4 +1,5 @@
 # Code for Fig. 4 - heatmap of Arrhenius Ea values
+# Michaletz ST & Garen JC. 2024. Hotter is not (always) better: Embracing unimodal scaling of biological rates with temperature.
 
 library(rTPC)
 library(tidyverse)

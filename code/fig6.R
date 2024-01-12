@@ -1,5 +1,6 @@
 # Code to generate Figure 6 - Arroyo et al. model parameter estimates
 # Sensitivity to noise and T range
+# Michaletz ST & Garen JC. 2024. Hotter is not (always) better: Embracing unimodal scaling of biological rates with temperature.
 
 library(rTPC)
 library(tidyverse)

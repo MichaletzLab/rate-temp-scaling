@@ -1,6 +1,6 @@
 # Description ----
 # Figure 2 plot and analyses from
-# Michaletz, S.T. & Garen, J.C. (in review) On the scaling of biological rates with temperature.
+# Michaletz ST & Garen JC. 2024. Hotter is not (always) better: Embracing unimodal scaling of biological rates with temperature.
 
 # Code to reproduce photosynthesis model and activation energy
 # calculation from Allen et al. (2005). Main functions are:
@@ -141,7 +141,7 @@ fig2 <- ggplot() +
   geom_line(data = df, aes(x = neg_invT, y = Photo_BAfit), color = 'black', linewidth = 0.75, lty = 2) +
   geom_point(data = df[c(1,31),], aes(x = neg_invT, y = Photo_FvCB), color = "#0000FF",fill = "#0000FF", pch = 21, size = 2.75) +
   xlab(expression(paste('Reciprocal thermal energy, ', '-1/',italic('k')[italic("B")], italic('T'), ' (',  eV^{-1}, ')'))) +
-  ylab(expression(paste("Photosynthesis (relative units)"))) +
+  ylab(expression(paste("Photosynthesis rate (relative units)"))) +
   annotate(geom = "richtext", label = "<span style='color: #00B050;'>FvCB prediction</span><br><span style='color: #0000FF;'>Fitted data </span><br>Arrhenius fit",
            x = -1/(0.00008617*(32+273.15)), y = 0.375, fill = NA, label.color = NA) +
   scale_x_continuous(sec.axis = sec_axis(trans = ~ (-1/(.*0.00008617))-273.15 , name = expression(paste('Temperature'~(degree*C))))) +
@@ -149,6 +149,10 @@ fig2 <- ggplot() +
   theme_bw(base_size=12) +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
 fig2
+
+png("Figure_2.png", width = 4,height = 4, res = 300, units = "in")
+fig2
+dev.off()
 
 # Estimate activation energy and CI from SS fit
 michaletz_2021 <- function(temp, J_ref, E, E_D, T_opt, T_ref = 25) { 
