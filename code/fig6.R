@@ -260,7 +260,8 @@ svg("Figure_6.svg",width=7,height=6)
 plot_grid(p1,p2,p3,p4,
           align="hv")
 dev.off()
-postscript("Figure_6.eps", width = 7, height = 6, horizontal = FALSE, onefile = FALSE, paper = "special")
+
+pdf("Figure_6.pdf", width = 7, height = 6)
 plot_grid(p1,p2,p3,p4,
           align="hv")
 dev.off()

@@ -154,7 +154,7 @@ png("Figure_2.png", width = 4,height = 4, res = 300, units = "in")
 fig2
 dev.off()
 
-postscript("Figure_2.eps", width = 4, height = 4, horizontal = FALSE, onefile = FALSE, paper = "special")
+pdf("Figure_2.pdf", width = 4, height = 4)
 fig2
 dev.off()
 

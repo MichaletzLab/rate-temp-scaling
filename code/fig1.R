@@ -142,7 +142,8 @@ png("Figure_1.png", width = 8,height = 4, res = 300, units = "in")
 grid.arrange(neu1, neu2, ncol=2)
 dev.off()
 
-postscript("Figure_1.eps", width = 8, height = 4, horizontal = FALSE, onefile = FALSE, paper = "special")
+pdf("Figure_1.pdf", width = 8, height = 4)
 grid.arrange(neu1, neu2, ncol=2)
 dev.off()
+
 
