@@ -93,7 +93,7 @@ tpc = data.frame(temperature = 0:50,
 p2 = ggplot(tpc, aes(x=temperature,y=performance)) +
     geom_line() +
     xlab("Temperature (°C)") +
-    ylab("Performance") +
+    ylab("Biological rate") +
     my_theme +
     theme(
       panel.background = element_rect(fill='transparent'), #transparent panel bg
