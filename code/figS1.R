@@ -1,3 +1,6 @@
+# Figure S1 plot and analyses from
+# Michaletz ST & Garen JC. 2024. Hotter is not (always) better: Embracing unimodal scaling of biological rates with temperature.
+
 library(rTPC)
 library(tidyverse)
 library(ggplot2)
@@ -37,7 +40,7 @@ ggplot(fitting_data, aes(x = temperature, y = performance)) +
   my_theme +
   #theme(strip.placement) +
   xlab("Temperature (°C)") +
-  ylab("Performance") +
+  ylab("Biological rate") +
   facet_wrap(~t_range,ncol=4, strip.position="right",
              labeller = as_labeller(c("5" = "T[range]==5*~degree*C",
                                       "7" = "T[range]==7*~degree*C",

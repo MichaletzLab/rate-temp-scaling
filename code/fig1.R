@@ -1,6 +1,6 @@
 # Description ----
 # Figure 1 plot and analyses from
-# Michaletz, S.T. & Garen, J.C. (in review) On the scaling of biological rates with temperature.
+# Michaletz ST & Garen JC. 2024. Hotter is not (always) better: Embracing unimodal scaling of biological rates with temperature.
 
 # Initialize ----
 #--Libraries
@@ -101,10 +101,7 @@ kb <- 8.62e-5
 eq = -coef(fit_neu3)[2] - 2*coef(fit_neu3)[3]*(1/(kb*mean(neu_trunc2$Temp_K))) # Eqn. 10, Pawar et al. (2016)
 eq
 
-
-
-# New method of getting Pawar Eq using rearranged Eqns. 9 and 10
-
+# New method of getting Pawar E_q using rearranged Eqns. 9 and 10
 # Our model looks like this:
 # y = q_0 - Eq*x + q_2*(x^2 - 2*x_bar*x)
 neu_trunc2
@@ -119,9 +116,6 @@ Eq
 # Get 95CI
 -confint(fit_neu4)[2,]
 
-
-
-
 # Calculate Pawar et al. (2016) estimates of rate for plotting
 predict_SS3 <- data.frame(neg_invT = neu_trunc2$neg_invT, lnRate = predict(fit_neu3, newdata=data.frame(invT=neu_trunc2$invT, invT2=neu_trunc2$invT2)))
 predict_SS3$rate <- exp(predict_SS3$lnRate)
@@ -131,8 +125,8 @@ neu2 <- ggplot() +
   geom_point(data = neu, aes(x = neg_invT, y = rate), shape = 19, size = 2.75, col = "gray85") +
   stat_ma_line(data=subset(neu, neu$neg_invT <= neu$neg_invT[which.max(neu$rate)]), 
                aes(x = neg_invT, y = rate), method="RMA", range.y = "interval", range.x = "interval", color = "#FF00FF", linewidth = 0.75, se=F, lty=1) + #Plot RMA Arrhenius fit to data below Tpeak
-  geom_line(data = predict_SS3, aes(x = neg_invT, y = rate*0.96), color = '#FFA500', linewidth = 0.75, lty=1) + # Plot Pawar et al. (2016) fit
-  stat_ma_line(data=neu_trunc, mapping = aes(x = neg_invT, y = rate*1.04, group=grp), method="RMA", range.y = "interval", range.x = "interval", color = "#00BFFF", linewidth = 0.75, se=F, lty=1) + #Plot strucchange piecewise RMA Arrhenius fit to data below Tpeak
+  geom_line(data = predict_SS3, aes(x = neg_invT, y = rate), color = '#FFA500', linewidth = 0.75, lty=1) + # Plot Pawar et al. (2016) fit
+  stat_ma_line(data=neu_trunc, mapping = aes(x = neg_invT, y = rate, group=grp), method="RMA", range.y = "interval", range.x = "interval", color = "#00BFFF", linewidth = 0.75, se=F, lty=1) + #Plot strucchange piecewise RMA Arrhenius fit to data below Tpeak
   geom_line(data = predict_SS2, aes(x = neg_invT, y = rate), color = 'black', linewidth = 0.75, lty=3) + # Plot Sharpe-Schoolfield with low- and high-temp deactivation
   xlab(expression(paste('Reciprocal thermal energy, ', '-1/',italic('k')[italic("B")], italic('T'), ' (',  eV^{-1}, ')'))) +
   ylab(expression(paste("Population growth rate (cells ", cell^{-1}, " ", time^{-1}, ")"))) +
@@ -143,8 +137,12 @@ neu2 <- ggplot() +
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(), axis.line = element_line(colour = "black"))
 neu2
 
-png("plot.png", width = 8,height = 4, res = 300, units = "in")
 # Figure 1: Plot panels together ----
+png("Figure_1.png", width = 8,height = 4, res = 300, units = "in")
+grid.arrange(neu1, neu2, ncol=2)
+dev.off()
+
+postscript("Figure_1.eps", width = 8, height = 4, horizontal = FALSE, onefile = FALSE, paper = "special")
 grid.arrange(neu1, neu2, ncol=2)
 dev.off()
 
