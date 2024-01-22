@@ -114,7 +114,12 @@ p3 = ggplot(data = results, aes(x = E_arr)) +
   ylab("Density") +
   labs(tag = "C")
 
-svg("fig4.svg", width = 7, height = 4)
+svg("Figure_4.svg", width = 7, height = 4)
+grid.arrange(p1,p2,p3,ncol=2,
+             layout_matrix = cbind(c(1,1), c(1,1), c(2,3)))
+dev.off()
+
+postscript("Figure_4.eps", width = 7, height = 4, horizontal = FALSE, onefile = FALSE, paper = "special")
 grid.arrange(p1,p2,p3,ncol=2,
              layout_matrix = cbind(c(1,1), c(1,1), c(2,3)))
 dev.off()

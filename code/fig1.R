@@ -101,10 +101,7 @@ kb <- 8.62e-5
 eq = -coef(fit_neu3)[2] - 2*coef(fit_neu3)[3]*(1/(kb*mean(neu_trunc2$Temp_K))) # Eqn. 10, Pawar et al. (2016)
 eq
 
-
-
-# New method of getting Pawar Eq using rearranged Eqns. 9 and 10
-
+# New method of getting Pawar E_q using rearranged Eqns. 9 and 10
 # Our model looks like this:
 # y = q_0 - Eq*x + q_2*(x^2 - 2*x_bar*x)
 neu_trunc2
@@ -118,9 +115,6 @@ Eq = -coef(fit_neu4)[2]
 Eq 
 # Get 95CI
 -confint(fit_neu4)[2,]
-
-
-
 
 # Calculate Pawar et al. (2016) estimates of rate for plotting
 predict_SS3 <- data.frame(neg_invT = neu_trunc2$neg_invT, lnRate = predict(fit_neu3, newdata=data.frame(invT=neu_trunc2$invT, invT2=neu_trunc2$invT2)))
@@ -145,6 +139,10 @@ neu2
 
 # Figure 1: Plot panels together ----
 png("Figure_1.png", width = 8,height = 4, res = 300, units = "in")
+grid.arrange(neu1, neu2, ncol=2)
+dev.off()
+
+postscript("Figure_1.eps", width = 8, height = 4, horizontal = FALSE, onefile = FALSE, paper = "special")
 grid.arrange(neu1, neu2, ncol=2)
 dev.off()
 

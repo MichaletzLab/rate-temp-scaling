@@ -154,6 +154,10 @@ png("Figure_2.png", width = 4,height = 4, res = 300, units = "in")
 fig2
 dev.off()
 
+postscript("Figure_2.eps", width = 4, height = 4, horizontal = FALSE, onefile = FALSE, paper = "special")
+fig2
+dev.off()
+
 # Estimate activation energy and CI from SS fit
 michaletz_2021 <- function(temp, J_ref, E, E_D, T_opt, T_ref = 25) { 
   # temp   : Temperature values to evaluate at (C)

@@ -61,5 +61,8 @@ ggarrange(pan_a, pan_b, common.legend = F, legend = "right", labels = "auto")
 png("Figure_3.png", width = 8,height = 4, res = 300, units = "in")
 ggarrange(pan_a, pan_b, common.legend = F, legend = "right", labels = "auto")
 dev.off()
+postscript("Figure_3.eps", width = 8, height = 4, horizontal = FALSE, onefile = FALSE, paper = "special")
+ggarrange(pan_a, pan_b, common.legend = F, legend = "right", labels = "auto")
+dev.off()
 
 
