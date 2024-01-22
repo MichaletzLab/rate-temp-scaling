@@ -255,8 +255,12 @@ p4 = ggplot(a, aes(x=100*noise.level, y = value/1000, color = Density)) +
   ylab(expression("ΔC (kJ K"^-1*")")) +
   labs(tag = "D")
 
-# Save plot to file
-svg("fig6.svg",width=7,height=6)
+# Save plot to files
+svg("Figure_6.svg",width=7,height=6)
+plot_grid(p1,p2,p3,p4,
+          align="hv")
+dev.off()
+postscript("Figure_6.eps", width = 7, height = 6, horizontal = FALSE, onefile = FALSE, paper = "special")
 plot_grid(p1,p2,p3,p4,
           align="hv")
 dev.off()

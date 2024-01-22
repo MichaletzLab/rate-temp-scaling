@@ -221,7 +221,10 @@ p2 = ggplotGrob(
 p = p1 + 
   annotation_custom(grob = p2, xmin = 2.5, xmax = 22, ymin = -0.07, ymax = 0.4)
 
-# Write to file
-svg("fig5.svg", width = 4, height = 3.25)
+# Write to files
+svg("Figure_5.svg", width = 4, height = 3.25)
+grid.arrange(p1)
+dev.off()
+postscript("Figure_5.eps", width = 4, height = 3.25, horizontal = FALSE, onefile = FALSE, paper = "special")
 grid.arrange(p1)
 dev.off()
