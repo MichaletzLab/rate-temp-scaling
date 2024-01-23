@@ -161,6 +161,8 @@ nrep = 100 # Number of repetitions at each noise level
 noise.levels = seq(0.001,0.03, 0.001) # SD of gaussian noise
 ntot = nrep*length(noise.levels)
 
+set.seed(123)
+
 len = dim(tpc.curve)[1]
 
 # copy each curve a number of times equal to noise levels times nrep
@@ -257,6 +259,11 @@ p4 = ggplot(a, aes(x=100*noise.level, y = value/1000, color = Density)) +
 
 # Save plot to files
 svg("Figure_6.svg",width=7,height=6)
+plot_grid(p1,p2,p3,p4,
+          align="hv")
+dev.off()
+
+tiff("Figure_4.tiff", width = 7, height = 6, res = 1000, units = "in")
 plot_grid(p1,p2,p3,p4,
           align="hv")
 dev.off()
